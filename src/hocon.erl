@@ -94,6 +94,7 @@ binary(Binary) ->
 binary(Binary, Opts) ->
     try
         IncludeDirs = [filename:dirname(Dir)  || Dir <-maps:get(include_dirs, Opts, [])],
+        logger:log(warning," IncludeDirs = ~p", [IncludeDirs]),
         CtxList = [{path, '$root'}, {filename, undefined}, {include_dirs, IncludeDirs}],
         Ctx = hocon_util:stack_multiple_push(CtxList, #{}),
         Map = transform(do_binary(Binary, Ctx), Opts),
