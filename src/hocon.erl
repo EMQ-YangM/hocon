@@ -97,6 +97,7 @@ binary(Binary, Opts) ->
         logger:log(warning," IncludeDirs = ~p", [IncludeDirs]),
         CtxList = [{path, '$root'}, {filename, undefined}, {include_dirs, IncludeDirs}],
         Ctx = hocon_util:stack_multiple_push(CtxList, #{}),
+        logger:log(warning," Ctx = ~p", [Ctx]),
         Map = transform(do_binary(Binary, Ctx), Opts),
         {ok, apply_opts(Map, Opts)}
     catch
