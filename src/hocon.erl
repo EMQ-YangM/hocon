@@ -99,6 +99,7 @@ binary(Binary, Opts) ->
         Ctx = hocon_util:stack_multiple_push(CtxList, #{}),
         logger:log(warning," Ctx = ~p", [Ctx]),
         Map = transform(do_binary(Binary, Ctx), Opts),
+        logger:log(warning," Map = ~p", [Map]),
         {ok, apply_opts(Map, Opts)}
     catch
         throw:Reason -> {error, Reason}
