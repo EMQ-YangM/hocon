@@ -143,7 +143,9 @@ parse(Tokens, Ctx) ->
 
 -spec include(boxed(), hocon:ctx()) -> boxed().
 include(#{?HOCON_T := object} = O, Ctx) ->
+    logger:log(warning," O = ~p, Ctx = ~p", [O,Ctx]),
     NewV = do_include(value_of(O), [], Ctx, hocon_util:get_stack(path, Ctx)),
+    logger:log(warning," NewW = ~p", [NewV]),
     Filename = hd(hocon_util:get_stack(filename, Ctx)),
     hocon_util:deep_merge(O, box_v(Filename, NewV)).
 
